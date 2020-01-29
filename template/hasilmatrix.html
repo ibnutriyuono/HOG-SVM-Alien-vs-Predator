@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">SVM</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">ProsesSvm <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="main">
+        <div class="row mt-4">
+            <div class="col-12">
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#matrix">Resize Matrix 50x50</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#matrix-gray">Matrix Gray</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#matrix-hog">Matrix HOG</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#hasil-data-uji">Hasil Data Uji</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#hasil-validasi">Hasil Validasi</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="tab-content">
+                    <div class="tab-pane" id="matrix">
+                        <div class="container">
+                            <h2>List Matrix Gambar</h2>
+                            {% for row in data %}
+                            <ul>
+                                {% for element in row[1:] %}
+                                <li>{{element}}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="matrix-gray">
+                        <div class="container">
+                            <h2>List Matrix Gray</h2>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">X[i]</th>
+                                        <th scope="col">X[j]</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in gray %}
+                                    <tr>
+                                        <td>{{item[0]}}</td>
+                                        <td>{{item[1]}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="matrix-hog">
+                        <div class="container">
+                            <h2>List Matrix HOG</h2>
+                            <table class="table table-striped">
+
+                                <tbody>
+                                    {% for item in hog %}
+                                    <tr>
+                                        <td>{{item}}</td>
+                                        <!-- <td>{{item[1]}}</td> -->
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="hasil-data-uji">
+                        <div class="container">
+                            <h4 class="mb-2">Hasil Data Uji</h4>
+                            <table class="table table-striped">
+                                <tbody id="hasil-data-table">
+                                    <tr>
+                                        <th scope='row'>Hasil Prediksi</th>
+                                        <td id="akurasi-data">{{hasilpredic}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope='row'>Label Prediksi</th>
+                                        <td id="recall-data">{{labelprediksi}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="hasil-validasi">
+                        <div class="container">
+                            <h4 class="mb-2">Hasil Validasi</h4>
+                            <table class="table table-striped">
+                                <tbody id="hasil-data-table">
+                                    <tr>
+                                        <th scope='row'>Jumlah TP</th>
+                                        <td id="akurasi-data">{{jumlahtp}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope='row'>Jumlah TN</th>
+                                        <td id="akurasi-data">{{jumlahtn}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope='row'>Jumlah FN</th>
+                                        <td id="akurasi-data">{{jumlahfn}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope='row'>Jumlah FP</th>
+                                        <td id="akurasi-data">{{jumlahfp}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope='row'>Jumlah P</th>
+                                        <td id="akurasi-data">{{jumlahp}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope='row'>Jumlah N</th>
+                                        <td id="akurasi-data">{{jumlahn}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope='row'>Akurasi</th>
+                                        <td id="akurasi-data">{{akurasi}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope='row'>Error</th>
+                                        <td id="akurasi-data">{{error}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope='row'>Precision</th>
+                                        <td id="akurasi-data">{{precision}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope='row'>Recall</th>
+                                        <td id="akurasi-data">{{recall}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope='row'>F1 Score</th>
+                                        <td id="akurasi-data">{{f1}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
